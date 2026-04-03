@@ -75,7 +75,7 @@ function App() {
               <polyline points="7 10 12 15 17 10"/>
               <line x1="12" y1="15" x2="12" y2="3"/>
             </svg>
-            Download App
+            <span className="btn-label">Download App</span>
           </button>
         </div>
       </nav>
@@ -97,14 +97,14 @@ function App() {
               <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
               <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
             </svg>
-            Copy
+            <span className="btn-label">Copy</span>
           </button>
           <button className="action-btn" onClick={clearCode} title="Clear">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="3 6 5 6 21 6"/>
               <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
             </svg>
-            Clear
+            <span className="btn-label">Clear</span>
           </button>
           <button
             className={`run-btn ${isRunning ? "running" : ""}`}
@@ -114,14 +114,14 @@ function App() {
             {isRunning ? (
               <>
                 <span className="spinner"></span>
-                Compiling...
+                <span className="btn-label">Compiling...</span>
               </>
             ) : (
               <>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                   <polygon points="5 3 19 12 5 21 5 3"/>
                 </svg>
-                Run
+                <span className="btn-label">Run</span>
               </>
             )}
           </button>
@@ -218,7 +218,7 @@ function App() {
               <polyline points="7 10 12 15 17 10"/>
               <line x1="12" y1="15" x2="12" y2="3"/>
             </svg>
-            Download Desktop App
+            <span className="btn-label">Download Desktop App</span>
           </button>
         </div>
       </div>

@@ -1,38 +1,551 @@
-.App {
-  text-align: center;
+/* ── Reset & Base ── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
+body {
+  background: #0d1117;
+  color: #e6edf3;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  min-height: 100vh;
+}
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Navbar ── */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  height: 56px;
+  background: #161b22;
+  border-bottom: 1px solid #30363d;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.logo-icon {
+  color: #2dba4e;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.logo-text {
+  color: #e6edf3;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 24px;
+}
+
+.nav-link {
+  color: #8b949e;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: #e6edf3;
+}
+
+.download-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: #238636;
+  color: #fff;
+  border: 1px solid #2ea043;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.download-nav-btn:hover {
+  background: #2ea043;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(46, 160, 67, 0.3);
+}
+
+/* ── Compiler Header ── */
+.compiler-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background: #0d1117;
+  border-bottom: 1px solid #21262d;
+}
+
+.compiler-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.compiler-title h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #e6edf3;
+}
+
+.lang-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.java-badge {
+  background: rgba(46, 160, 67, 0.15);
+  color: #2dba4e;
+  border: 1px solid rgba(46, 160, 67, 0.3);
+}
+
+.compiler-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  background: #21262d;
+  color: #8b949e;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.action-btn:hover {
+  background: #30363d;
+  color: #e6edf3;
+  border-color: #484f58;
+}
+
+.run-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 20px;
+  background: #238636;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s;
+  min-width: 130px;
+  justify-content: center;
+}
+
+.run-btn:hover:not(:disabled) {
+  background: #2ea043;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(46, 160, 67, 0.4);
+}
+
+.run-btn:disabled {
+  background: #1a3a24;
+  color: #56d364;
+  cursor: not-allowed;
+}
+
+.run-btn.running {
+  background: #1a3a24;
+}
+
+.spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(86, 211, 100, 0.3);
+  border-top-color: #56d364;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Compiler Body (Split Panel) ── */
+.compiler-body {
+  display: flex;
+  flex: 1;
+  height: calc(100vh - 56px - 53px - 100px - 40px);
+  min-height: 400px;
+}
+
+/* Editor Panel */
+.editor-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #21262d;
+  position: relative;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: #161b22;
+  border-bottom: 1px solid #21262d;
+}
+
+.panel-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.panel-dot.red { background: #f85149; }
+.panel-dot.yellow { background: #d29922; }
+.panel-dot.green { background: #2dba4e; }
+
+.panel-title {
+  margin-left: 8px;
+  font-size: 13px;
+  color: #8b949e;
+  font-weight: 500;
+}
+
+.line-numbers {
+  position: absolute;
+  left: 0;
+  top: 41px;
+  bottom: 0;
+  width: 48px;
+  background: #0d1117;
+  border-right: 1px solid #21262d;
+  padding: 12px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0;
+  overflow: hidden;
+  z-index: 2;
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.line-numbers span {
+  display: block;
+  padding-right: 12px;
+  font-size: 13px;
+  line-height: 22px;
+  color: #484f58;
+  font-family: 'Consolas', 'Fira Code', 'Courier New', monospace;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.code-editor {
+  flex: 1;
+  background: #0d1117;
+  color: #e6edf3;
+  border: none;
+  outline: none;
+  resize: none;
+  padding: 12px 16px 12px 60px;
+  font-family: 'Consolas', 'Fira Code', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 22px;
+  tab-size: 4;
+  overflow-y: auto;
+}
+
+.code-editor::placeholder {
+  color: #484f58;
+}
+
+.code-editor::-webkit-scrollbar {
+  width: 8px;
+}
+
+.code-editor::-webkit-scrollbar-track {
+  background: #0d1117;
+}
+
+.code-editor::-webkit-scrollbar-thumb {
+  background: #30363d;
+  border-radius: 4px;
+}
+
+.code-editor::-webkit-scrollbar-thumb:hover {
+  background: #484f58;
+}
+
+/* Result Panel */
+.result-panel {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  background: #0d1117;
+}
+
+.result-tabs {
+  display: flex;
+  background: #161b22;
+  border-bottom: 1px solid #21262d;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 10px 16px;
+  background: transparent;
+  color: #8b949e;
+  border: none;
+  border-bottom: 2px solid transparent;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tab-btn:hover {
+  color: #e6edf3;
+  background: #1c2128;
+}
+
+.tab-btn.active {
+  color: #2dba4e;
+  border-bottom-color: #2dba4e;
+}
+
+.output-area,
+.input-area {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.output-area::-webkit-scrollbar,
+.input-area::-webkit-scrollbar {
+  width: 8px;
+}
+
+.output-area::-webkit-scrollbar-track,
+.input-area::-webkit-scrollbar-track {
+  background: #0d1117;
+}
+
+.output-area::-webkit-scrollbar-thumb,
+.input-area::-webkit-scrollbar-thumb {
+  background: #30363d;
+  border-radius: 4px;
+}
+
+.output-text {
+  padding: 16px;
+  font-family: 'Consolas', 'Fira Code', 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 20px;
+  color: #e6edf3;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.output-placeholder {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  height: 100%;
+  gap: 12px;
+  color: #484f58;
 }
 
-.App-link {
-  color: #61dafb;
+.output-placeholder p {
+  font-size: 14px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.output-placeholder strong {
+  color: #2dba4e;
+}
+
+.input-editor {
+  width: 100%;
+  height: 100%;
+  background: #0d1117;
+  color: #e6edf3;
+  border: none;
+  outline: none;
+  resize: none;
+  padding: 16px;
+  font-family: 'Consolas', 'Fira Code', 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.input-editor::placeholder {
+  color: #484f58;
+}
+
+/* ── Download Section ── */
+.download-section {
+  padding: 12px 24px;
+  background: #0d1117;
+  border-top: 1px solid #21262d;
+}
+
+.download-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #0d2818 0%, #0d1117 50%, #161b22 100%);
+  border: 1px solid #1a3a24;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.download-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(45, 186, 78, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.download-card-icon {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(46, 160, 67, 0.1);
+  border: 1px solid rgba(46, 160, 67, 0.2);
+  border-radius: 12px;
+  color: #2dba4e;
+}
+
+.download-card-info {
+  flex: 1;
+}
+
+.download-card-info h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #e6edf3;
+  margin-bottom: 4px;
+}
+
+.download-card-info p {
+  font-size: 13px;
+  color: #8b949e;
+  line-height: 1.4;
+}
+
+.download-main-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  background: #238636;
+  color: #fff;
+  border: 1px solid #2ea043;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s;
+  flex-shrink: 0;
+}
+
+.download-main-btn:hover {
+  background: #2ea043;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(46, 160, 67, 0.35);
+}
+
+/* ── Footer ── */
+.footer {
+  padding: 10px 24px;
+  text-align: center;
+  background: #0d1117;
+  border-top: 1px solid #21262d;
+}
+
+.footer p {
+  font-size: 12px;
+  color: #484f58;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
   }
-  to {
-    transform: rotate(360deg);
+
+  .compiler-body {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .editor-panel {
+    height: 350px;
+    border-right: none;
+    border-bottom: 1px solid #21262d;
+  }
+
+  .result-panel {
+    width: 100%;
+    height: 300px;
+  }
+
+  .download-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .compiler-header {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
   }
 }

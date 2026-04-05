@@ -39,7 +39,7 @@ function App() {
 
   const downloadApp = () => {
     window.open(
-      "https://github.com/KOREADEVELOPERS/Runnercompilenocmd/releases/download/v4.0/CodeRunnerSetup.exe",
+      "https://github.com/KOREADEVELOPERS/desktop-runner/releases/download/v4.0/CodeRunnerSetup.exe",
       "_blank"
     );
   };

@@ -39,7 +39,7 @@ function App() {
 
   const downloadApp = () => {
     window.open(
-   "https://github.com/KOREADEVELOPERS/Runnercodedraft/releases/download/vb4/BackendApp.zip",
+  "https://github.com/KOREADEVELOPERS/Runnercodedraft/releases/tag/vb4/BackendApp.zip",
       "_blank"
     );
   };

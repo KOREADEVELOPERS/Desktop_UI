@@ -39,7 +39,7 @@ function App() {
 
   const downloadApp = () => {
     window.open(
-      "https://github.com/KOREADEVELOPERS/desktop-runner/releases/download/v4.0/CodeRunnerSetup.exe",
+   "https://github.com/KOREADEVELOPERS/Runnercodedraft/releases/download/vb4/BackendApp.zip",
       "_blank"
     );
   };

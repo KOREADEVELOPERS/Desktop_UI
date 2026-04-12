@@ -20,7 +20,6 @@ function App() {
     setOutput("");
     setActiveTab("output");
 
-
     fetch("http://localhost:8080/run", {
       method: "POST",
       headers: { "Content-Type": "text/plain" },
@@ -37,11 +36,11 @@ function App() {
       });
   };
 
+  // ✅ CORRECTED DOWNLOAD FUNCTION
   const downloadApp = () => {
-    window.open(
-  "https://github.com/KOREADEVELOPERS/Runnercodedraft/releases/tag/vb4/BackendApp.zip",
-      "_blank"
-    );
+    // Direct file download link
+    const downloadUrl = "https://github.com/KOREADEVELOPERS/Runnercodedraft/releases/download/vb4/BackendApp.zip";
+    window.open(downloadUrl, "_blank");
   };
 
   const clearCode = () => {
